@@ -2,23 +2,13 @@
 #include <stdio.h>
 #include "linked_list.h"
 
-typedef struct ll_node ll_node_t;
-struct ll_node {
-    int value;
-    struct ll_node *next;
-};
-
-struct linked_list {
-    size_t length;
-    ll_node_t *head;
-    ll_node_t *tail;
-};
 
 ll_node_t *create_node(int value)
 {
     ll_node_t *result = malloc(sizeof(ll_node_t));
     result->value = value;
     result->next = NULL;
+    result->prev = NULL;
 
     return result;
 }
@@ -26,14 +16,19 @@ ll_node_t *create_node(int value)
 linked_list_t *ll_create()
 {
     linked_list_t *new_list = malloc(sizeof(linked_list_t));
-    new_list->length = 0;
-    new_list->head = NULL;
-    new_list->tail = NULL;
+    ll_init(new_list);
 
     return new_list;
 }
 
-size_t ll_length(linked_list_t *list)
+void ll_init(linked_list_t *list)
+{
+    list->length = 0;
+    list->head = NULL;
+    list->tail = NULL;
+}
+
+size_t ll_length(const linked_list_t *list)
 {
     return list->length;
 }
@@ -65,6 +60,16 @@ void ll_push_back(linked_list_t *list, int value)
 
     list->tail = node;
     list->length++;
+}
+
+ll_node_t *ll_node_navigate(ll_node_t *node, int index)
+{
+    int i = 0;
+    while (i < index) {
+        node = node->next;
+        i++;
+    }
+    return node;
 }
 
 void ll_print(linked_list_t *list)
