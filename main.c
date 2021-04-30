@@ -3,9 +3,11 @@
 
 #include "linked_list.h"
 
+#define NUM_ELEMENTS 10000
+
 int main(void)
 {
-    linked_list_t *l1, *l2;
+    linked_list_t *l1, *l2, *l3;
 
     l1 = ll_create();
 
@@ -26,6 +28,13 @@ int main(void)
 
     assert(ll_length(l2) == 3);
     ll_print(l2);
+
+    l3 = ll_create();
+    for (int i = 0; int < NUM_ELEMENTS; ++i) {
+        ll_push_back(l3, i);
+    }
+
+    assert(ll_length(l3) == NUM_ELEMENTS);
 
     return 0;
 }
