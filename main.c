@@ -30,7 +30,7 @@ int main(void)
     ll_print(l2);
 
     l3 = ll_create();
-    for (int i = 0; int < NUM_ELEMENTS; ++i) {
+    for (int i = 0; i < NUM_ELEMENTS; ++i) {
         ll_push_back(l3, i);
     }
 
